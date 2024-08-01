@@ -1,11 +1,29 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
+import 'package:islami_app/tabs/hadeth/hadeth_tab.dart';
+import 'package:islami_app/tabs/quran/quran_tab.dart';
+import 'package:islami_app/tabs/radio/radio_tab.dart';
+import 'package:islami_app/tabs/sebha/sebha_tab.dart';
+import 'package:islami_app/tabs/settings/settings_tab.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   static const String routeName = '/';
   const HomeScreen({super.key});
 
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  int currentIndex = 0;
+  List<Widget> tabs = [
+    QuranTab(),
+    HadethTab(),
+    SebhaTab(),
+    RadioTab(),
+    SettingsTab(),
+  ];
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -15,34 +33,44 @@ class HomeScreen extends StatelessWidget {
             fit: BoxFit.fill),
       ),
       child: Scaffold(
-        backgroundColor: Colors.transparent,
-        bottomNavigationBar:
-            BottomNavigationBar(type: BottomNavigationBarType.fixed, items: [
-          BottomNavigationBarItem(
-            icon: ImageIcon(
-              AssetImage('assets/images/icon_quran.png'),
-            ),
-            label: 'Quran',
+        appBar: AppBar(
+          title: Text(
+            'إسلامي',
           ),
-          BottomNavigationBarItem(
-              icon: ImageIcon(
-                AssetImage('assets/images/icon_hadeth.png'),
+        ),
+        body: tabs[currentIndex],
+        bottomNavigationBar: BottomNavigationBar(
+            currentIndex: currentIndex,
+            onTap: (index) {
+              currentIndex = index;
+              setState(() {});
+            },
+            items: [
+              BottomNavigationBarItem(
+                icon: ImageIcon(
+                  AssetImage('assets/images/icon_quran.png'),
+                ),
+                label: 'Quran',
               ),
-              label: 'Hadeth'),
-          BottomNavigationBarItem(
-            icon: ImageIcon(
-              AssetImage('assets/images/icon_sebha.png'),
-            ),
-            label: 'Sebha',
-          ),
-          BottomNavigationBarItem(
-              icon: ImageIcon(
-                AssetImage('assets/images/icon_radio.png'),
+              BottomNavigationBarItem(
+                  icon: ImageIcon(
+                    AssetImage('assets/images/icon_hadeth.png'),
+                  ),
+                  label: 'Hadeth'),
+              BottomNavigationBarItem(
+                icon: ImageIcon(
+                  AssetImage('assets/images/icon_sebha.png'),
+                ),
+                label: 'Sebha',
               ),
-              label: 'Radio'),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.settings_outlined), label: 'Settings'),
-        ]),
+              BottomNavigationBarItem(
+                  icon: ImageIcon(
+                    AssetImage('assets/images/icon_radio.png'),
+                  ),
+                  label: 'Radio'),
+              BottomNavigationBarItem(
+                  icon: Icon(Icons.settings_outlined), label: 'Settings'),
+            ]),
       ),
     );
   }
