@@ -132,8 +132,10 @@ class QuranTab extends StatelessWidget {
         Expanded(
           child: ListView.separated(
             itemBuilder: (_, index) => GestureDetector(
-              onTap: () =>
-                  Navigator.of(context).pushNamed(SuraDetailsScreen.routeName),
+              onTap: () => Navigator.of(context).pushNamed(
+                  SuraDetailsScreen.routeName,
+                  arguments: SuraDetailsArgs(
+                      suraName: suraNames[index], index: index)),
               child: Text(
                 suraNames[index],
                 style: Theme.of(context).textTheme.headlineSmall,
@@ -149,4 +151,11 @@ class QuranTab extends StatelessWidget {
       ],
     );
   }
+}
+
+class SuraDetailsArgs {
+  String suraName;
+  int index;
+
+  SuraDetailsArgs({required this.suraName, required this.index});
 }
