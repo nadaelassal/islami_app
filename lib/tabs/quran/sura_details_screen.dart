@@ -1,10 +1,20 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:islami_app/app_theme.dart';
 import 'package:islami_app/tabs/quran/quran_tab.dart';
 
-class SuraDetailsScreen extends StatelessWidget {
+class SuraDetailsScreen extends StatefulWidget {
   static const String routeName = '/sura_details';
+
+  @override
+  State<SuraDetailsScreen> createState() => _SuraDetailsScreenState();
+}
+
+class _SuraDetailsScreenState extends State<SuraDetailsScreen> {
   List<String> ayat = [];
+  late SuraDetailsArgs args;
   @override
   Widget build(BuildContext context) {
     SuraDetailsArgs args =
@@ -36,5 +46,9 @@ class SuraDetailsScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  void loadSuraFile() {
+    rootBundle.loadString('assets/files/${args.index + 1}.txt');
   }
 }
