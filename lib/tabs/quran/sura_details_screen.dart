@@ -17,8 +17,8 @@ class _SuraDetailsScreenState extends State<SuraDetailsScreen> {
   late SuraDetailsArgs args;
   @override
   Widget build(BuildContext context) {
-    SuraDetailsArgs args =
-        ModalRoute.of(context)!.settings.arguments as SuraDetailsArgs;
+    args = ModalRoute.of(context)!.settings.arguments as SuraDetailsArgs;
+    loadSuraFile();
     return Container(
       decoration: BoxDecoration(
           image: DecorationImage(
@@ -35,20 +35,30 @@ class _SuraDetailsScreenState extends State<SuraDetailsScreen> {
               horizontal: MediaQuery.of(context).size.width * 0.07),
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(25), color: AppTheme.white),
-          child: ListView.builder(
-            itemBuilder: (_, index) => Text(
-              ayat[index],
-              textAlign: TextAlign.center,
-              style: Theme.of(context).textTheme.titleLarge,
-            ),
-            itemCount: ayat.length,
-          ),
+          child: ayat.isEmpty
+              ? Center(
+                  child: CircularProgressIndicator(
+                    color: AppTheme.gold,
+                  ),
+                )
+              : ListView.builder(
+                  itemBuilder: (_, index) => Text(
+                    ayat[index],
+                    textAlign: TextAlign.center,
+                    style: Theme.of(context).textTheme.titleLarge,
+                  ),
+                  itemCount: ayat.length,
+                ),
         ),
       ),
     );
   }
 
-  void loadSuraFile() {
-    rootBundle.loadString('assets/files/${args.index + 1}.txt');
+//read data from file
+  Future<void> loadSuraFile() async {
+    String sura =
+        await rootBundle.loadString('assets/files/${args.index + 1}.txt');
+    ayat = sura.split('\r\n'); //new line
+    setState(() {});
   }
 }
