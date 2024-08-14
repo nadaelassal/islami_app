@@ -13,6 +13,9 @@ class _HadethTabState extends State<HadethTab> {
   List<Hadeth> ahadeth = [];
   @override
   Widget build(BuildContext context) {
+    if (ahadeth.isEmpty) {
+      loadAhadethFile();
+    }
     return Column(
       children: [
         Image.asset(
@@ -27,6 +30,7 @@ class _HadethTabState extends State<HadethTab> {
             itemBuilder: (_, index) => GestureDetector(
               onTap: () => Navigator.of(context).pushNamed(
                 HadethDetailsScreen.routeName,
+                arguments:ahadeth[index] ,
               ),
               child: Text(
                 ahadeth[index].title,
@@ -43,10 +47,18 @@ class _HadethTabState extends State<HadethTab> {
       ],
     );
   }
-}
 
-loadAhadethFile() async {
-  String ahadethFileContent =
-      await rootBundle.loadString('assets/files/ahadeth.text');
-  List<String> ahadethText = ahadethFileContent.split('#');
+  Future<void> loadAhadethFile() async {
+    String ahadethFileContent =
+        await rootBundle.loadString('assets/files/ahadeth.txt');
+    List<String> ahadethText = ahadethFileContent.split('#');
+    ahadeth = ahadethText.map((hadethText) {
+      List<String> hadethLines = hadethText.trim().split('\n');
+      String title = hadethLines.first;
+      hadethLines.removeAt(0);
+      List<String> content = hadethLines;
+      return Hadeth(title: title, content: content);
+    }).toList();
+    setState(() {});
+  }
 }

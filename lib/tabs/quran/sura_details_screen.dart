@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:islami_app/app_theme.dart';
 import 'package:islami_app/tabs/quran/quran_tab.dart';
+import 'package:islami_app/widgets/loading_indicator.dart';
 
 class SuraDetailsScreen extends StatefulWidget {
   static const String routeName = '/sura_details';
@@ -18,7 +19,7 @@ class _SuraDetailsScreenState extends State<SuraDetailsScreen> {
   @override
   Widget build(BuildContext context) {
     args = ModalRoute.of(context)!.settings.arguments as SuraDetailsArgs;
-    loadSuraFile();
+    if(ayat.isEmpty){loadSuraFile();}
     return Container(
       decoration: BoxDecoration(
           image: DecorationImage(
@@ -36,11 +37,7 @@ class _SuraDetailsScreenState extends State<SuraDetailsScreen> {
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(25), color: AppTheme.white),
           child: ayat.isEmpty
-              ? Center(
-                  child: CircularProgressIndicator(
-                    color: AppTheme.gold,
-                  ),
-                )
+              ?  LoadingIndicator()
               : ListView.builder(
                   itemBuilder: (_, index) => Text(
                     ayat[index],
