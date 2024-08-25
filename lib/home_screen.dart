@@ -8,6 +8,9 @@ import 'package:islami_app/tabs/sebha/sebha_tab.dart';
 import 'package:islami_app/tabs/settings/settings_provider.dart';
 import 'package:islami_app/tabs/settings/settings_tab.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+
 
 class HomeScreen extends StatefulWidget {
   static const String routeName = '/';
@@ -37,7 +40,7 @@ class _HomeScreenState extends State<HomeScreen> {
       child: Scaffold(
         appBar: AppBar(
           title: Text(
-            'إسلامي',
+           AppLocalizations.of(context)!.islami,
           ),
         ),
         body: tabs[currentIndex],
