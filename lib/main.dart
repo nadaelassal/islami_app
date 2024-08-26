@@ -10,7 +10,9 @@ import 'package:islami_app/tabs/settings/settings_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-void main() {
+void main() async {
+  var provider = SettingsProvider();
+  await provider.loadTheme();
   runApp(
     ChangeNotifierProvider(
       create: (_) => SettingsProvider(),

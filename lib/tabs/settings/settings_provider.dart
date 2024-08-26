@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SettingsProvider with ChangeNotifier {
-  ThemeMode themeMode = ThemeMode.light;
+  ThemeMode themeMode = ThemeMode.system;
 
   SharedPreferences? prefs;
   String language = 'en';
@@ -12,6 +12,7 @@ class SettingsProvider with ChangeNotifier {
       'assets/images/${isDark ? 'dark_bg' : 'default_bg'}.png';
   void changeThemeMode(ThemeMode selectedThemeMode) {
     themeMode = selectedThemeMode;
+    setThemeToCash(themeMode);
     notifyListeners();
   }
 
@@ -25,9 +26,14 @@ class SettingsProvider with ChangeNotifier {
     String themeName = themeMode==ThemeMode.light ? 'Light' : 'Dark' ;
     await prefs!.setString('theme', themeName);
 }
-Future <String?> loadTheme() async{
+loadTheme() async{
+   prefs = await SharedPreferences.getInstance();
   final String? themeName = prefs!.getString('theme');
-  return themeName ;
+
+  if (themeName!=null){
+    themeMode = themeName == 'Light'? ThemeMode.light : ThemeMode.dark;
+    notifyListeners();
+  }
 
 }
 }
