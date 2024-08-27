@@ -4,7 +4,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 class SettingsProvider with ChangeNotifier {
   ThemeMode themeMode = ThemeMode.system;
   SharedPreferences? prefs;
-  late String language;
+  String language = 'en';
   bool get isDark => themeMode == ThemeMode.dark;
 
   String get backgroundImagePath =>
@@ -17,7 +17,7 @@ class SettingsProvider with ChangeNotifier {
 
   void changeLanguage(String selectedLanguage) {
     language = selectedLanguage;
-    setLanguageToCash(language);
+    setLanguageToCash(language!);
     notifyListeners();
   }
 

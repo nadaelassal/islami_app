@@ -49,7 +49,7 @@ class SettingsTab extends StatelessWidget {
                         'English',
                         style: TextStyle(
                             color: settingsProvider.isDark
-                                ? Colors.white
+                                ? AppTheme.gold
                                 : Colors.black),
                       ),
                     ),
@@ -59,7 +59,7 @@ class SettingsTab extends StatelessWidget {
                         'العربية',
                         style: TextStyle(
                             color: settingsProvider.isDark
-                                ? Colors.white
+                                ? AppTheme.gold
                                 : Colors.black),
                       ),
                     )
