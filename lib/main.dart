@@ -11,11 +11,14 @@ import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
   var provider = SettingsProvider();
   await provider.loadTheme();
+  await provider.loadLanguage();
   runApp(
     ChangeNotifierProvider(
-      create: (_) => SettingsProvider(),
+      create: (BuildContext context) => provider,
       child: IslamiApp(),
     ),
   );

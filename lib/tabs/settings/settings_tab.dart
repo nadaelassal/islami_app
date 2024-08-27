@@ -41,22 +41,35 @@ class SettingsTab extends StatelessWidget {
               ),
               DropdownButtonHideUnderline(
                 child: DropdownButton(
-                   value: settingsProvider.language,
+                  value: settingsProvider.language,
                   items: [
-                  DropdownMenuItem(
-                    value: 'en',
-                    child: Text('English'),
-                  ),
-                  DropdownMenuItem(
-                    value: 'ar',
-                    child: Text('العربية'),
-                  )
-                ], onChanged: (selectedLanguage) {
-                  if (selectedLanguage == null) return ;
-                  settingsProvider.changeLanguage(selectedLanguage);
-                },
-                dropdownColor: AppTheme.white,
-                borderRadius: BorderRadius.circular(16),
+                    DropdownMenuItem(
+                      value: 'en',
+                      child: Text(
+                        'English',
+                        style: TextStyle(
+                            color: settingsProvider.isDark
+                                ? Colors.white
+                                : Colors.black),
+                      ),
+                    ),
+                    DropdownMenuItem(
+                      value: 'ar',
+                      child: Text(
+                        'العربية',
+                        style: TextStyle(
+                            color: settingsProvider.isDark
+                                ? Colors.white
+                                : Colors.black),
+                      ),
+                    )
+                  ],
+                  onChanged: (selectedLanguage) {
+                    if (selectedLanguage == null) return;
+                    settingsProvider.changeLanguage(selectedLanguage);
+                  },
+                  dropdownColor: AppTheme.white,
+                  borderRadius: BorderRadius.circular(16),
                 ),
               )
             ],
