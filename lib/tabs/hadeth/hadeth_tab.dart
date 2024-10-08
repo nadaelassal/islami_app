@@ -30,7 +30,7 @@ class _HadethTabState extends State<HadethTab> {
             itemBuilder: (_, index) => GestureDetector(
               onTap: () => Navigator.of(context).pushNamed(
                 HadethDetailsScreen.routeName,
-                arguments:ahadeth[index] ,
+                arguments: ahadeth[index],
               ),
               child: Text(
                 ahadeth[index].title,

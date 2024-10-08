@@ -10,8 +10,6 @@ import 'package:islami_app/tabs/settings/settings_tab.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-
-
 class HomeScreen extends StatefulWidget {
   static const String routeName = '/';
   const HomeScreen({super.key});
@@ -34,13 +32,14 @@ class _HomeScreenState extends State<HomeScreen> {
     return Container(
       decoration: BoxDecoration(
         image: DecorationImage(
-            image: AssetImage(Provider.of<SettingsProvider>(context).backgroundImagePath),
+            image: AssetImage(
+                Provider.of<SettingsProvider>(context).backgroundImagePath),
             fit: BoxFit.fill),
       ),
       child: Scaffold(
         appBar: AppBar(
           title: Text(
-           AppLocalizations.of(context)!.islami,
+            AppLocalizations.of(context)!.islami,
           ),
         ),
         body: tabs[currentIndex],
