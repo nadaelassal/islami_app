@@ -39,7 +39,7 @@ class AppTheme {
         color: black,
       ),
     ),
-     switchTheme: SwitchThemeData(
+    switchTheme: SwitchThemeData(
       thumbColor: WidgetStatePropertyAll(white),
     ),
   );

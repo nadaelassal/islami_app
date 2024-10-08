@@ -20,10 +20,11 @@ class _SuraDetailsScreenState extends State<SuraDetailsScreen> {
   late SuraDetailsArgs args;
   @override
   Widget build(BuildContext context) {
-
     SettingsProvider settingsProvider = Provider.of<SettingsProvider>(context);
     args = ModalRoute.of(context)!.settings.arguments as SuraDetailsArgs;
-    if(ayat.isEmpty){loadSuraFile();}
+    if (ayat.isEmpty) {
+      loadSuraFile();
+    }
     return Container(
       decoration: BoxDecoration(
           image: DecorationImage(
@@ -39,9 +40,12 @@ class _SuraDetailsScreenState extends State<SuraDetailsScreen> {
               vertical: MediaQuery.of(context).size.height * 0.06,
               horizontal: MediaQuery.of(context).size.width * 0.07),
           decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(25), color:settingsProvider.isDark ? AppTheme.darkPrimary : AppTheme.white),
+              borderRadius: BorderRadius.circular(25),
+              color: settingsProvider.isDark
+                  ? AppTheme.darkPrimary
+                  : AppTheme.white),
           child: ayat.isEmpty
-              ?  LoadingIndicator()
+              ? LoadingIndicator()
               : ListView.builder(
                   itemBuilder: (_, index) => Text(
                     ayat[index],
